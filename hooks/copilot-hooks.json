@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "hooks": [
+    {
+      "event": "SessionStart",
+      "command": "ponytail-session-start",
+      "description": "Injects Ponytail instructions at session start"
+    },
+    {
+      "event": "UserPromptSubmitted",
+      "command": "ponytail-prompt-submitted",
+      "description": "Handles mid-session prompts (output dropped by Copilot)"
+    }
+  ]
+}
