@@ -1,0 +1,19 @@
+{
+  "name": "sentinel-foundry-145",
+  "version": "1.0.0",
+  "description": "Makes your AI agent think like the laziest senior dev in the room",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "ponytail"
+  ],
+  "author": "Ryan Vo",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
