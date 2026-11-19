@@ -63,7 +63,7 @@ function getEffectiveMode(host, currentMode, sessionMode) {
     // Mode file changes only affect future sessions
     return {
       effectiveMode: sessionMode || currentMode,
-      pendingMode: currentMode,
+      pendingMode: sessionMode !== currentMode ? currentMode : null,
       willApplyOnNextSession: sessionMode !== currentMode,
       message: sessionMode !== currentMode 
         ? `Mode changed to "${currentMode}". Takes effect on next session start.` 
