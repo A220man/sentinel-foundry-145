@@ -373,7 +373,7 @@ export const register: Register = (on, options) => {
               </Text>
             )}
           </Box>
-          <Box flexDirection="row" alignItems="center" gap={1}>
+          <Box flexDirection="row" alignItems="center" gap={1} justifyContent="space-between">
             <Button key="review" plain label="Review" onPress={review} />
             <Button key="audit" plain label="Audit" onPress={audit} />
             <Button key="board" plain label="Board" onPress={board} />
@@ -429,7 +429,7 @@ export const register: Register = (on, options) => {
 
     return stack(
       <Box flexDirection="column" width={width} gap={e.surface === 'desktop' ? 1 : 0}>
-        <Box flexDirection="row" alignItems="center" gap={1}>
+        <Box flexDirection="row" alignItems="center" gap={1} justifyContent="space-between">
           {LEVELS.map(level => (
             <Button
               key={`level-${level}`}
@@ -438,7 +438,6 @@ export const register: Register = (on, options) => {
               onPress={() => setLevel(level)}
             />
           ))}
-          <Box flexGrow={1} />
           <Button key="copy" plain label="Copy" onPress={copy} />
           <Button key="review" plain label="Review" onPress={review} />
           <Button key="audit" plain label="Audit" onPress={audit} />
