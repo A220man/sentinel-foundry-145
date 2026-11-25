@@ -59,14 +59,15 @@ function supportsMidSessionUpdate(host) {
  */
 function getEffectiveMode(host, currentMode, sessionMode) {
   if (host === 'copilot') {
-    // For Copilot, the active session uses the mode from SessionStart
-    // Mode file changes only affect future sessions
+    // For Copilot, the active session uses the mode from SessionStart.
+    // Mode file changes only affect future sessions.
+    const hasPending = sessionMode !== undefined && sessionMode !== currentMode
     return {
       effectiveMode: sessionMode || currentMode,
-      pendingMode: currentMode,
-      willApplyOnNextSession: sessionMode !== currentMode,
-      message: sessionMode !== currentMode 
-        ? `Mode changed to "${currentMode}". Takes effect on next session start.` 
+      pendingMode: hasPending ? currentMode : null,
+      willApplyOnNextSession: hasPending,
+      message: hasPending
+        ? `Mode changed to "${currentMode}". Takes effect on next session start.`
         : null
     }
   }

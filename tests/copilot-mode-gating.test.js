@@ -62,6 +62,26 @@ describe('Copilot mode gating', () => {
       expect(result.willApplyOnNextSession).toBe(false)
       expect(result.message).toBeNull()
     })
+
+    test('does not report a pending change when session mode is unknown for Copilot', () => {
+      // /ponytail with no args on Copilot does not know the session mode, so
+      // there is nothing to report as pending. It must not claim a change.
+      const result = getEffectiveMode('copilot', 'lite', undefined)
+      expect(result.effectiveMode).toBe('lite')
+      expect(result.pendingMode).toBeNull()
+      expect(result.willApplyOnNextSession).toBe(false)
+      expect(result.message).toBeNull()
+    })
+
+    test('reports pending mode and keeps effective session mode when a real change exists', () => {
+      // File says full, Copilot session is still lite: the change is pending
+      // but the session keeps running in lite until the next SessionStart.
+      const result = getEffectiveMode('copilot', 'full', 'lite')
+      expect(result.effectiveMode).toBe('lite')
+      expect(result.pendingMode).toBe('full')
+      expect(result.willApplyOnNextSession).toBe(true)
+      expect(result.message).toContain('Takes effect on next session start')
+    })
   })
 
   describe('handleModeCommand', () => {
