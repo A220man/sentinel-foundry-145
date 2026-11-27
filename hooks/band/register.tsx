@@ -76,7 +76,11 @@ const load = async ($: EngineInterface): Promise<Band> => ({ ...EMPTY, ...(await
 
 const union = (a: string[], b: string[]) => [...new Set([...a, ...b])]
 // Fix for Windows: split on both forward slashes and backslashes
-const base = (path: string) => path.replace(/[\\/]+$/, '').split(/[\\/]/).pop() ?? path
+  const base = (path: string) => {
+    // Extract project name from path, handling both forward slashes and backslashes (Windows fix for issue #1191)
+    // Removes trailing slashes, splits on \\ or \\/, and returns the last path component
+    return path.replace(/[\\/]+$/, "").split(/[\\/]/).pop() ?? path
+  }
 
 // Windows sets USERPROFILE, not HOME.
 const home = async ($: EngineInterface) => (await $.env.get('HOME')) ?? (await $.env.get('USERPROFILE'))
